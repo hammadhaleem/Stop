@@ -38,4 +38,24 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('microblog startup')
 
+
+
+
+
+from flask.ext.admin.contrib import sqla
+from flask.ext.admin import Admin
+import logging
+from logging.handlers import RotatingFileHandler
+from models import Goods, User
+from app import views, models
+
+class FedoraModelView(sqla.ModelView):
+    column_display_pk = True
+    column_display_pk = True
+
+admin = Admin(app)
+admin.add_view(FedoraModelView(User, db.session))
+admin.add_view(FedoraModelView(Goods, db.session))
+
+
 from app import views, models
