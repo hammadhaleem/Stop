@@ -15,11 +15,11 @@ def index( ):
 
 @app.route('/product/<product>',methods = ['GET','POST'])
 def get_product_by_id(product=0):
-	good = Goods.query.filter_by(goodsid= product).all()
+	good = Goods.query.filter_by(goodsid= product).all()[0]
 	return jsonify(good.getdata())
 
 @app.route('/user/<userid>',methods = ['GET','POST'])
 def get_user_by_id(userid=0):
-	user = User.query.filter_by(id = userid).all()
+	user = User.query.filter_by(id = userid).all()[0]
 	return jsonify(user.getdata())
 
