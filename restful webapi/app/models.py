@@ -32,6 +32,9 @@ class User(db.Model):
         'phone_number' :  phone_number
         }
         return data 
+        
+    def __unicode__(self):
+        return (self.username)
 
 class Goods(db.Model):
     __searchable__ = ['name']
@@ -64,8 +67,12 @@ class Goods(db.Model):
         'goodsDescription' :goodsDescription
         }
         return data
+
     def __repr__(self):
         return '<Goods %r>' % (self.goodsName)
+
+    def __unicode__(self):
+        return (self.goodsName)
 
 if enable_search:
     whooshalchemy.whoosh_index(app, Goods)
