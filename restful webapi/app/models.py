@@ -37,7 +37,7 @@ class User(db.Model):
         return (self.username)
 
 class Goods(db.Model):
-    __searchable__ = ['goodsName']
+    __searchable__ = ['goodsName','goodsDescription']
 
     goodsid = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Integer)
@@ -74,5 +74,5 @@ class Goods(db.Model):
     def __unicode__(self):
         return (self.goodsName)
 
-if enable_search:
-    whooshalchemy.whoosh_index(app, Goods)
+#if enable_search:
+#    whooshalchemy.whoosh_index(app, Goods)
