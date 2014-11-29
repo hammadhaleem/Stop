@@ -32,12 +32,12 @@ class User(db.Model):
         'phone_number' :  phone_number
         }
         return data 
-        
+
     def __unicode__(self):
         return (self.username)
 
 class Goods(db.Model):
-    __searchable__ = ['name']
+    __searchable__ = ['goodsName','goodsDescription']
 
     goodsid = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Integer)
