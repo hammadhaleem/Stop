@@ -12,33 +12,27 @@ else:
 class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    nickname = db.Column(db.String(64), index=True, unique=True)
+    username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
-    about_me = db.Column(db.String(140))
-    last_seen = db.Column(db.DateTime)
+    phone_number = db.Column(db.String(140))
     
-    def Addpeople(id,nickname,email,posts,about_me,last_seen):
-        this.nickname = nickname
-        this.email=  email
-        this.posts = posts
-        this.about_me = about_me 
-        this.last_seen = last_seen
+    def Addpeople(username,email,phone_number):
+        this.username = username
+        this.email = email
+        this.phone_number = phone_number
 
     def __repr__(self):
         return '<User %r>' % (self.nickname)
     
     def getdata():
         data = {
-        'idi': id ,
-        'nickname' : nickname,
+        'id': id ,
+        'username' : username,
         'email' : email,
-        'posts' :  posts,
-        'about_me'  : about_me,
-        'last_seen' :last_seen
+        'phone_number' :  phone_number
         }
         return data 
-        
+
 class Goods(db.Model):
     __searchable__ = ['name']
 
