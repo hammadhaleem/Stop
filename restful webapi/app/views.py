@@ -8,7 +8,10 @@ from .models import User, Goods
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index( ):
-   return jsonify({"Pages": "list of pages"})
+   return jsonify({
+   	"Pages": "list of pages",
+   	'Product By ID ' : '/product/<product-id>',
+   	'User By ID' : '/user/<userid>'})
 
 @app.route('/product/<product>',methods = ['GET','POST'])
 def get_product_by_id(product=0):
