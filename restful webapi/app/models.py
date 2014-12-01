@@ -16,7 +16,7 @@ class User(db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     phone_number = db.Column(db.String(140))
     
-    def Addpeople(username,email,phone_number):
+    def Addpeople(self,username,email,phone_number):
         this.username = username
         this.email = email
         this.phone_number = phone_number
@@ -24,7 +24,7 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % (self.nickname)
     
-    def getdata():
+    def getdata(slef):
         data = {
         'id': id ,
         'username' : username,
@@ -48,7 +48,7 @@ class Goods(db.Model):
     goodsDescription = db.Column(db.String(1400))
     data = {}
 
-    def  GoodsInformation(  pictureId,  longitude, latitude,  price,  name,  desc) :
+    def  GoodsInformation(self,pictureId,  longitude, latitude,  price,  name,  desc) :
         this.pictureId = pictureId
         this.longitude = longitude
         this.latitude = latitude
@@ -56,7 +56,7 @@ class Goods(db.Model):
         this.goodsName = name
         this.goodsDescription = desc
     
-    def getdata():
+    def getdata(self):
         data = {
         'goodsid' : goodsid , 
         'price' :price,
