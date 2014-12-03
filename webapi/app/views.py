@@ -123,11 +123,11 @@ def register(username,password,email,phone):
 		return jsonify({'Status': 'Error'})
 
 
-@app.route('/AddProduct/<Goodsid>/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/')
-@app.route('/AddProduct/<Goodsid>/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>')
-def add_good(Goodsid,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
+@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/')
+@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>')
+def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
 	good = Goods()
-	good.GoodsInformation(Goodsid,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription)
+	good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription)
 	try:
 		db.session.add(good)
 		db.session.commit()
