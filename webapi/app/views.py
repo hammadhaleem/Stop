@@ -77,7 +77,7 @@ def uploaded_file(filename):
 
 @app.route('/convert/<filename>')
 def uploaded_file(filename):
-	path = '/home/engineer/htdocs/stop/webapi/uploads/'+filename
+    path = '/home/engineer/htdocs/stop/webapi/uploads/'+filename
     stri = pytesseract.image_to_string(Image.open(path))
     return stri
     #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
