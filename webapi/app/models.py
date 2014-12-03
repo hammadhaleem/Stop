@@ -2,12 +2,7 @@ from hashlib import md5
 from app import db
 from app import app
 
-import sys
-if sys.version_info >= (3, 0):
-    enable_search = False
-else:
-    enable_search = True
-    import flask.ext.whooshalchemy as whooshalchemy
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,6 +34,7 @@ class User(db.Model):
         return (self.username)
 
 class Goods(db.Model):
+    __tablename__ = 'goods'
     __searchable__ = ['goodsName','goodsDescription']
 
     goodsid = db.Column(db.Integer, primary_key=True)
@@ -76,4 +72,3 @@ class Goods(db.Model):
     def __unicode__(self):
         return (self.goodsName)
 
-whooshalchemy.whoosh_index(app, Goods)

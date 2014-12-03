@@ -39,6 +39,12 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('microblog startup')
 
+import sys
+if sys.version_info >= (3, 0):
+    enable_search = False
+else:
+    enable_search = True
+    import flask.ext.whooshalchemy as whooshalchemy
 
 
 
@@ -57,6 +63,5 @@ class FedoraModelView(sqla.ModelView):
 admin = Admin(app)
 admin.add_view(FedoraModelView(User, db.session))
 admin.add_view(FedoraModelView(Goods, db.session))
-
-
+whooshalchemy.whoosh_index(app, Goods)
 from app import views, models
