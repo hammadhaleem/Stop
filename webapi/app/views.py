@@ -31,7 +31,7 @@ def index( ):
    	'Login' : '/login/<username>/<password>',
    	'Add Product' : '/AddProduct/<Price : int >/<Pictureid: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>',
    	'Search':'/search/<product-name>',
-   	'Route':'/getpath/[long,lat];[long,lat];[long,lat];[long,lat];[long,lat]/'
+   	'Route':'/getpath/long,lat;long,lat;long,lat;long,lat;long,lat/'
    	 
    	 })
 
@@ -155,9 +155,9 @@ def search(keyword=None):
 def route(cord = None):
 	cord = cord.split(";")
 	print cord
-	
-	start = list[cord[0]]
-	end = list[cord[len(cord)-1]]
+
+	start = cord[0]
+	end = cord[len(cord)-1
 
 	start = str(start[0]) + ", "+str(start[1])
 	end   = str(end[0]) + ", "+str(end[1])
