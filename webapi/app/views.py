@@ -59,8 +59,6 @@ def index_upload():
 @app.route('/upload', methods=['POST'])
 def upload():
     data = request.data
-
-    print data
     file = request.files['file']
     if file and allowed_file((file.filename).lower()):
         filename = secure_filename(file.filename).lower()
