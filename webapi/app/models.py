@@ -35,15 +35,15 @@ class User(db.Model):
 
 class Goods(db.Model):
     __tablename__ = 'goods'
-    __searchable__ = ['goodsName','goodsDescription']
+    __searchable__ = ['goodsname','goodsdescription']
 
     goodsid = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Integer)
     pictureId =  db.Column(db.String(1400))
     longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
-    goodsName = db.Column(db.String(64), index=True, unique=True)
-    goodsDescription = db.Column(db.String(1400))
+    goodsname = db.Column(db.String(64), index=True, unique=True)
+    goodsdescription = db.Column(db.String(1400))
     data = {}
 
     def GoodsInformation(self,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
@@ -51,8 +51,8 @@ class Goods(db.Model):
         self.longitude = Longitude
         self.latitude = Latitude
         self.price = Price
-        self.goodsName = Goodsname
-        self.goodsDescription = Goodsdescription
+        self.goodsname = Goodsname
+        self.goodsdescription = Goodsdescription
     
     def getdata(self):
         data = {
@@ -61,14 +61,14 @@ class Goods(db.Model):
             'pictureId' : self.pictureId,
             'longitude' :self.longitude,
             'latitude' : self.latitude,
-            'goodsName' :self.goodsName,
-            'goodsDescription' :self.goodsDescription
+            'goodsName' :self.goodsname,
+            'goodsDescription' :self.goodsdescription
         }
         return data
 
     def __repr__(self):
-        return '<Goods %r>' % (self.goodsName)
+        return '<Goods %r>' % (self.goodsname)
 
     def __unicode__(self):
-        return (self.goodsName)
+        return (self.goodsname)
 
