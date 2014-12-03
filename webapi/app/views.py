@@ -130,6 +130,7 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
 	try:
 		db.session.add(good)
 		db.session.commit()
-		return jsonify(good.getdata())
+		#return jsonify(good.getdata())
+		return "added"
 	except Exception as e:
 		jsonify({'status' : 'Error'})
