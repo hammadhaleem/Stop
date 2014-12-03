@@ -80,7 +80,7 @@ def upload():
 @app.route('/uploads/<username>/<filename>/')
 @app.route('/uploads/<username>/<filename>')
 def uploaded_file(filename,username):
-	filename = filename + username
+    filename = filename + username
     return send_from_directory('/home/engineer/htdocs/stop/webapi/uploads',filename)
     #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
 
