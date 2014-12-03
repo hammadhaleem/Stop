@@ -84,7 +84,7 @@ import tesseract
 @app.route('/convert/<filename>')
 def convert_file(filename):
     path = str(app.config['UPLOAD_FOLDER']+filename)
-    path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename)
+    #path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename)
     image=cv.LoadImage(path, cv.CV_LOAD_IMAGE_GRAYSCALE)
 
 	api = tesseract.TessBaseAPI()
