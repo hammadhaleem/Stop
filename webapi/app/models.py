@@ -27,11 +27,11 @@ class User(db.Model):
     
     def getdata(self):
         data = {
-        'id': self.id ,
-        'username' : self.username,
-        'email' : self.email,
-        'phone_number' :  self.phone_number,
-        'password' : self.password
+            'id': self.id ,
+            'username' : self.username,
+            'email' : self.email,
+            'phone_number' :  self.phone_number,
+            'password' : self.password
         }
         return data 
 
@@ -39,7 +39,7 @@ class User(db.Model):
         return (self.username)
 
 class Goods(db.Model):
-    #__searchable__ = ['goodsName','goodsDescription']
+    __searchable__ = ['goodsName','goodsDescription']
 
     goodsid = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Integer)
@@ -76,5 +76,4 @@ class Goods(db.Model):
     def __unicode__(self):
         return (self.goodsName)
 
-#if enable_search:
-#    whooshalchemy.whoosh_index(app, Goods)
+whooshalchemy.whoosh_index(app, Goods)

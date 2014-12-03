@@ -29,8 +29,10 @@ def index( ):
    	'User By ID' : '/user/<userid',
    	'Add User' :  '/register/<username>/<password>/<email>/<phone>',
    	'Login' : '/login/<username>/<password>',
-   	'Add Product' : '/AddProduct/<Price : int >/<Pictureid: string>/<Longitude:float>/<Latitude:float>/<Goodsname>/<Goodsdescription>'
-   	   	})
+   	'Add Product' : '/AddProduct/<Price : int >/<Pictureid: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>'.
+   	'Search':'/search/<product-name>'
+   	 
+   	 })
 
 @app.route('/product/<product>',methods = ['GET','POST'])
 def get_product_by_id(product=0):
@@ -134,3 +136,9 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
 	except Exception as e:
 		print e
 		return jsonify({'status' : 'Error'})
+
+
+@app.route('/search/<product-name>')
+@app.route('/search/<product-name>/')
+def search(productname):
+	
