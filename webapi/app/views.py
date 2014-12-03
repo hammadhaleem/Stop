@@ -26,7 +26,10 @@ def index( ):
    return jsonify({
    	"Pages": "list of pages",
    	'Product By ID ' : '/product/<product-id>',
-   	'User By ID' : '/user/<userid>'})
+   	'User By ID' : '/user/<userid',
+   	'Add User' :  '/register/<username>/<password>/<email>/<phone>',
+   	'Login' : '/login/<username>/<password>'
+   	   	})
 
 @app.route('/product/<product>',methods = ['GET','POST'])
 def get_product_by_id(product=0):
