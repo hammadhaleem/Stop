@@ -125,11 +125,7 @@ def conver_file_advance(filename):
 	offset=30
 	height,width = image1.shape
 	image1=cv2.copyMakeBorder(image1,offset,offset,offset,offset,cv2.BORDER_CONSTANT,value=(255,255,255)) 
-	cv2.namedWindow("Test")
-	cv2.imshow("Test", image1)
 	cv2.imwrite("an91cut_decoded.jpg",image1)
-	cv2.waitKey(0)
-	cv2.destroyWindow("Test")
 	### tesseract OCR
 	api = tesseract.TessBaseAPI()
 	api.Init(".","eng",tesseract.OEM_DEFAULT)
