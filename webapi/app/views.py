@@ -64,6 +64,7 @@ def upload():
     file = request.files['file']
     if file and allowed_file((file.filename).lower()):
         filename = secure_filename(file.filename).lower()
+        print file 
         t= file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return jsonify({
         'file' : url_for('uploaded_file',filename=filename),
