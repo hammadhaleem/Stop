@@ -50,7 +50,7 @@ class Goods(db.Model):
     goodsDescription = db.Column(db.String(1400))
     data = {}
 
-    def  GoodsInformation(self,Goodsid,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
+    def GoodsInformation(self,Goodsid,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
         self.pictureId = Pictureid
         self.longitude = Longitude
         self.latitude = Latitude
