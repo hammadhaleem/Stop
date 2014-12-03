@@ -29,7 +29,7 @@ def index( ):
    	'User By ID' : '/user/<userid',
    	'Add User' :  '/register/<username>/<password>/<email>/<phone>',
    	'Login' : '/login/<username>/<password>',
-   	'Add Product' : '/AddProduct/<Price : int >/<PictureName: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>',
+   	'Add Product' : '/AddProduct/<Price : int >/<PictureName: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>/<address : text>',
    	'Search':'/search/<product-name>',
    	'Route':'/getpath/long,lat;long,lat;long,lat;long,lat;long,lat/'
    	 
