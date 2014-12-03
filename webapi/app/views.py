@@ -7,6 +7,8 @@ from werkzeug import secure_filename
 import os 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import Image
+import cv2.cv as cv
+import tesseract
 import pytesseract
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
@@ -76,16 +78,15 @@ def uploaded_file(filename):
 
 
 
-import cv2.cv as cv
-import tesseract
 
 
 
 @app.route('/convert/<filename>')
 def convert_file(filename):
-    path = str(app.config['UPLOAD_FOLDER']+filename)
-    #path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename)
-    image=cv.LoadImage(path, cv.CV_LOAD_IMAGE_GRAYSCALE)
+    #path = str(app.config['UPLOAD_FOLDER']+filename)
+    path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename)
+    fil = open(path,'r')
+    image=cv.LoadImage(fil, cv.CV_LOAD_IMAGE_GRAYSCALE)
 
 	api = tesseract.TessBaseAPI()
 	api.Init(".","eng",tesseract.OEM_DEFAULT)
@@ -94,5 +95,5 @@ def convert_file(filename):
 	tesseract.SetCvImage(image,api)
 	text=api.GetUTF8Text()
 	conf=api.MeanTextConf()
-	return text
+	return jsonify('output' : str(text))
     #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
