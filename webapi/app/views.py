@@ -10,6 +10,10 @@ import Image
 import cv2.cv as cv
 import tesseract
 import pytesseract
+import tesseract
+import cv2
+import cv2.cv as cv
+import numpy as np
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 # These are the extension that we are accepting to be uploaded
@@ -53,6 +57,9 @@ def index_upload():
 # Route that will process the file upload
 @app.route('/upload', methods=['POST'])
 def upload():
+	data = request.data
+	dataDict = json.loads(data)
+    print dataDict 
     file = request.files['file']
     if file and allowed_file((file.filename).lower()):
         filename = secure_filename(file.filename).lower()
@@ -88,14 +95,6 @@ def convert_file(filename):
     conf=api.MeanTextConf()
     return jsonify({'output' : str(text)})
 #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
-
-
-import tesseract
-import cv2
-import cv2.cv as cv
-import numpy as np
-
-
 
 
 @app.route('/converts/<filename>')
