@@ -154,6 +154,8 @@ def search(keyword=None):
 @app.route('/getpath/<cord>/', methods=['GET'])
 def route(cord = None):
 	cord = cord.split(";")
+	print cord
+	
 	start = list[cord[0]]
 	end = list[cord[len(cord)-1]]
 
