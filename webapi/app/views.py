@@ -6,7 +6,8 @@ from .models import User, Goods
 from werkzeug import secure_filename
 import os 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-
+import Image
+import pytesseract
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 # These are the extension that we are accepting to be uploaded
@@ -71,4 +72,12 @@ def upload():
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory('/home/engineer/htdocs/stop/webapi/uploads',filename)
+    #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
+
+
+@app.route('/convert/<filename>')
+def uploaded_file(filename):
+	path = '/home/engineer/htdocs/stop/webapi/uploads/'+filename
+    stri = pytesseract.image_to_string(Image.open(path))
+    return stri
     #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
