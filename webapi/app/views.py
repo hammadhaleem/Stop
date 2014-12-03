@@ -81,9 +81,10 @@ def uploaded_file(filename):
 def convert_file(filename):
     #path = str(app.config['UPLOAD_FOLDER']+filename)
     path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename).lower()
-    fil = open(path,'r')
-    image=cv.LoadImage(fil, cv.CV_LOAD_IMAGE_GRAYSCALE)
-
+    try:
+    	image=cv.LoadImage(path, cv.CV_LOAD_IMAGE_GRAYSCALE)
+    except:
+    	return str("Error")
     api = tesseract.TessBaseAPI()
     api.Init(".","eng",tesseract.OEM_DEFAULT)
     #api.SetPageSegMode(tesseract.PSM_SINGLE_WORD)
