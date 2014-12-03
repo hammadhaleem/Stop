@@ -91,5 +91,5 @@ def convert_file(filename):
     tesseract.SetCvImage(image,api)
     text=api.GetUTF8Text()
     conf=api.MeanTextConf()
-    return jsonify('output' : str(text))
+    return jsonify({'output' : str(text)})
 #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
