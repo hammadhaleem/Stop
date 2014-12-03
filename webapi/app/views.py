@@ -30,7 +30,8 @@ def index( ):
    	'Add User' :  '/register/<username>/<password>/<email>/<phone>',
    	'Login' : '/login/<username>/<password>',
    	'Add Product' : '/AddProduct/<Price : int >/<Pictureid: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>',
-   	'Search':'/search/<product-name>'
+   	'Search':'/search/<product-name>',
+   	'Route':'/getpath/[long,lat];[long,lat];[long,lat];[long,lat];[long,lat]/'
    	 
    	 })
 
@@ -140,7 +141,7 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
 
 
 @app.route('/search/<keyword>', methods=['GET'])
-@app.route('/search/<keyword>', methods=['GET'])
+@app.route('/search/<keyword>/', methods=['GET'])
 def search(keyword=None):
     data = []
     if data is not None:
@@ -148,3 +149,20 @@ def search(keyword=None):
         for obj in result:
             data.append(obj.getdata())
     return jsonify({'objects' : data})
+
+@app.route('/getpath/<cord>', methods=['GET'])
+@app.route('/getpath/<cord>/', methods=['GET'])
+def route(cord = None):
+	cord = cord.split(";")
+	start = list[cord[0]]
+	end = list[cord[len(cord)-1]]
+
+	start = str(start[0]) + ", "+str(start[1])
+	end   = str(end[0]) + ", "+str(end[1])
+	string = " "
+	key = "AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
+	url = "https://maps.googleapis.com/maps/api/directions/json?origin="
+	url = url + start+'&destination'+end+'&waypoints=optimize:true|'+string+'&key='
+	url = url +key
+
+	return str(url)
