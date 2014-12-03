@@ -55,7 +55,7 @@ def index_upload():
 def upload():
     file = request.files['file']
     if file and allowed_file((file.filename).lower()):
-        filename = secure_filename(file.filename)
+        filename = secure_filename(file.filename).lower()
         t= file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return jsonify({
         'file' : url_for('uploaded_file',filename=filename),
@@ -77,8 +77,8 @@ def convert_file(filename):
     path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename).lower()
     try:
     	image=cv.LoadImage(path, cv.CV_LOAD_IMAGE_GRAYSCALE)
-    except:
-    	return str("Error")
+    except Exception as e :
+    	return str("Error ")+str(e)
     api = tesseract.TessBaseAPI()
     api.Init(".","eng",tesseract.OEM_DEFAULT)
     #api.SetPageSegMode(tesseract.PSM_SINGLE_WORD)
