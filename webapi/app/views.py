@@ -138,7 +138,13 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
 		return jsonify({'status' : 'Error'})
 
 
-@app.route('/search/<product-name>')
-@app.route('/search/<product-name>/')
-def search(productname):
-	
+
+@bundle.route('/search/<keyword>', methods=['GET'])
+@bundle.route('/search/<keyword>', methods=['GET'])
+def search(keyword=None):
+    data = []
+    if data is not None:
+        result = Content.query.whoosh_search(keyword).all()
+        for obj in result:
+            data.append(obj.getdata())
+    return jsonify(data)
