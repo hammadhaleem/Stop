@@ -144,7 +144,7 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
 def search(keyword=None):
     data = []
     if data is not None:
-        result = Content.query.whoosh_search(keyword).all()
+        result = Goods.query.whoosh_search(keyword).all()
         for obj in result:
             data.append(obj.getdata())
     return jsonify(data)
