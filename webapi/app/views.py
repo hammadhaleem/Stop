@@ -57,11 +57,11 @@ def upload():
     if file and allowed_file((file.filename).lower()):
         filename = secure_filename(file.filename)
         t= file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return {
+        return jsonify({
         'file' : url_for('uploaded_file',filename=filename),
         'name' : filename,
         'ocr'  : url_for('convert_file',filename=filename)
-        }
+        })
     else:
     	return(str("Error!!"))
 
