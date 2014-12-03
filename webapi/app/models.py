@@ -10,16 +10,17 @@ else:
     import flask.ext.whooshalchemy as whooshalchemy
 
 class User(db.Model):
-
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     phone_number = db.Column(db.String(140))
+    password = db.Column(db.String(140))
     
-    def Addpeople(self,username,email,phone_number):
+    def Addpeople(self,username,email,phone_number,password):
         self.username = username
         self.email = email
         self.phone_number = phone_number
+        self.password = password
 
     def __repr__(self):
         return '<User %r>' % (self.nickname)
@@ -29,7 +30,8 @@ class User(db.Model):
         'id': self.id ,
         'username' : self.username,
         'email' : self.email,
-        'phone_number' :  self.phone_number
+        'phone_number' :  self.phone_number,
+        'password' : self.password
         }
         return data 
 

@@ -88,54 +88,25 @@ def convert_file(filename):
     	return str("Error ")+str(e)
     api = tesseract.TessBaseAPI()
     api.Init(".","eng",tesseract.OEM_DEFAULT)
-    #api.SetPageSegMode(tesseract.PSM_SINGLE_WORD)
     api.SetPageSegMode(tesseract.PSM_AUTO)
     tesseract.SetCvImage(image,api)
     text=api.GetUTF8Text()
     conf=api.MeanTextConf()
     return jsonify({'output' : str(text)})
-#return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
 
+#login
 
-@app.route('/converts/<filename>')
-def conver_file_advance(filename):
-	path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename).lower()
-	
-	scale = 1
-	delta = 0
-	ddepth = cv2.CV_16S
+@app.route('/login/<username>/<password>')
+def login(username,password):
+	user = User.query.filter_by(username = username).all()
+	if len(user) > 0 :
+		return jsonify(user[0].getdata())
+	else:
+		return jsonify({})
 
-	gray=cv2.imread(path)
-	cut_offset=23
-	gray=gray[cut_offset:-cut_offset,cut_offset:-cut_offset]
-	gray = cv2.cvtColor(gray,cv2.COLOR_BGR2GRAY)
-	grad_x = cv2.Sobel(gray,ddepth,1,0,ksize = 3, scale = scale, delta = delta,borderType = cv2.BORDER_DEFAULT)
-	grad_y = cv2.Sobel(gray,ddepth,0,1,ksize = 3, scale = scale, delta = delta, borderType = cv2.BORDER_DEFAULT)
-	abs_grad_x = cv2.convertScaleAbs(grad_x)  
-	abs_grad_y = cv2.convertScaleAbs(grad_y)
-	gray = cv2.addWeighted(abs_grad_x,0.5,abs_grad_y,0.5,0)
-	image1 = cv2.medianBlur(gray,5) 
-	image1[image1 < 50]= 255
-	image1 = cv2.GaussianBlur(image1,(31,13),0)
-	color_offset=230
-	image1[image1 >= color_offset]= 255  
-	image1[image1 < color_offset ] = 0
-
-	offset=30
-	height,width = image1.shape
-	image1=cv2.copyMakeBorder(image1,offset,offset,offset,offset,cv2.BORDER_CONSTANT,value=(255,255,255)) 
-	cv2.imwrite(path+str('_decoded'),image1)
-	### tesseract OCR
-	api = tesseract.TessBaseAPI()
-	api.Init(".","eng",tesseract.OEM_DEFAULT)
-	api.SetPageSegMode(tesseract.PSM_SINGLE_BLOCK)
-	height1,width1 = image1.shape
-	channel1=1
-	image = cv.CreateImageHeader((width1,height1), cv.IPL_DEPTH_8U, channel1)
-	cv.SetData(image, image1.tostring(),image1.dtype.itemsize * channel1 * (width1))
-	tesseract.SetCvImage(image,api)
-	text=api.GetUTF8Text()
-	conf=api.MeanTextConf()
-	image=None
-	print str(text),str(conf)
-	return str(text)
+@app.route('/register/<username>/<password>/<email>/<phone>')
+def register(username,password,email,phone):
+	user = User().Addpeople(username,password,email,phone)	
+	db.session.add(user)
+	db.session.commit()
+	return jsonify(user.getdata())
