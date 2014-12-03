@@ -57,8 +57,8 @@ def index_upload():
 # Route that will process the file upload
 @app.route('/upload', methods=['POST'])
 def upload():
-	data = request.data
-	dataDict = json.loads(data)
+    data = request.data
+    dataDict = json.loads(data)
     print dataDict 
     file = request.files['file']
     if file and allowed_file((file.filename).lower()):
