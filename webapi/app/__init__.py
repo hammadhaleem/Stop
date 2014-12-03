@@ -45,14 +45,11 @@ if sys.version_info >= (3, 0):
 else:
     enable_search = True
     import flask.ext.whooshalchemy as whooshalchemy
-
-
-
-
 from flask.ext.admin.contrib import sqla
 from flask.ext.admin import Admin
 import logging
 from logging.handlers import RotatingFileHandler
+
 from models import Goods, User
 from app import views, models
 
@@ -64,4 +61,5 @@ admin = Admin(app)
 admin.add_view(FedoraModelView(User, db.session))
 admin.add_view(FedoraModelView(Goods, db.session))
 whooshalchemy.whoosh_index(app, Goods)
+
 from app import views, models
