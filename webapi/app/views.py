@@ -62,10 +62,10 @@ def index_upload():
 @app.route('/upload/', methods=['POST'])
 @app.route('/upload', methods=['POST'])
 def upload():
-    data = request.data
+    name = request.data['username']
     file = request.files['file']
     if file and allowed_file((file.filename).lower()):
-        filename = secure_filename(file.filename).lower()
+        filename = secure_filename(file.filename+str(username)).lower()
         t= file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         print t 
         return jsonify({
@@ -76,15 +76,16 @@ def upload():
     else:
     	return(str("Error!!"))
 
-@app.route('/uploads/<filename>/')
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
+@app.route('/uploads/<username>/<filename>/')
+@app.route('/uploads/<username>/<filename>')
+def uploaded_file(filename,username):
+	filename = filename + username
     return send_from_directory('/home/engineer/htdocs/stop/webapi/uploads',filename)
     #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
 
-@app.route('/convert/<filename>/')
-@app.route('/convert/<filename>')
-def convert_file(filename):
+@app.route('/convert/<username>/<filename>/')
+@app.route('/convert/<username>/<filename>')
+def convert_file(filename,username):
     #path = str(app.config['UPLOAD_FOLDER']+filename)
     path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename).lower()
     try:
