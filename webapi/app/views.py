@@ -139,8 +139,8 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
 
 
 
-@bundle.route('/search/<keyword>', methods=['GET'])
-@bundle.route('/search/<keyword>', methods=['GET'])
+@app.route('/search/<keyword>', methods=['GET'])
+@app.route('/search/<keyword>', methods=['GET'])
 def search(keyword=None):
     data = []
     if data is not None:
