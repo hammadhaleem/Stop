@@ -147,4 +147,4 @@ def search(keyword=None):
         result = Goods.query.whoosh_search(keyword).all()
         for obj in result:
             data.append(obj.getdata())
-    return jsonify(data)
+    return jsonify({'objects' : data})
