@@ -97,8 +97,8 @@ def convert_file(filename):
     conf=api.MeanTextConf()
     return jsonify({'output' : str(text)})
 
-#login
 
+@app.route('/login/<username>/<password>/')
 @app.route('/login/<username>/<password>')
 def login(username,password):
 	user = User.query.filter_by(username = username).all()
@@ -107,6 +107,7 @@ def login(username,password):
 	else:
 		return jsonify({})
 
+@app.route('/register/<username>/<password>/<email>/<phone>/')
 @app.route('/register/<username>/<password>/<email>/<phone>')
 def register(username,password,email,phone):
 	user = User().Addpeople(username,password,email,phone)	
