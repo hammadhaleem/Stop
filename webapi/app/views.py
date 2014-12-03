@@ -28,7 +28,8 @@ def index( ):
    	'Product By ID ' : '/product/<product-id>',
    	'User By ID' : '/user/<userid',
    	'Add User' :  '/register/<username>/<password>/<email>/<phone>',
-   	'Login' : '/login/<username>/<password>'
+   	'Login' : '/login/<username>/<password>',
+   	'Add Product' : '/AddProduct/<Goodsid>/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>'
    	   	})
 
 @app.route('/product/<product>',methods = ['GET','POST'])
@@ -120,3 +121,16 @@ def register(username,password,email,phone):
 		return jsonify(user.getdata())
 	except :
 		return jsonify({'Status': 'Error'})
+
+
+@app.route('/AddProduct/<Goodsid>/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/')
+@app.route('/AddProduct/<Goodsid>/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>')
+def add_good(Goodsid,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
+	good = Goods()
+	good.GoodsInformation(Goodsid,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription)
+	try:
+		db.session.add(good)
+		db.session.commit()
+		return jsonify(good.getdata())
+	except:
+		jsonify({'status' : 'Error'})

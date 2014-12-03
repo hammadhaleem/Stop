@@ -50,13 +50,13 @@ class Goods(db.Model):
     goodsDescription = db.Column(db.String(1400))
     data = {}
 
-    def  GoodsInformation(self,pictureId,  longitude, latitude,  price,  name,  desc) :
-        self.pictureId = pictureId
-        self.longitude = longitude
-        self.latitude = latitude
-        self.price = price
-        self.goodsName = name
-        self.goodsDescription = desc
+    def  GoodsInformation(self,Goodsid,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
+        self.pictureId = Pictureid
+        self.longitude = Longitude
+        self.latitude = Latitude
+        self.price = Price
+        self.goodsName = Goodsname
+        self.goodsDescription = Goodsdescription
     
     def getdata(self):
         data = {
