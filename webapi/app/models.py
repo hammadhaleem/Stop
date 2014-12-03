@@ -43,7 +43,7 @@ class Goods(db.Model):
 
     goodsid = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Integer)
-    pictureId = db.Column(db.Integer)
+    pictureId =  db.Column(db.String(1400))
     longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
     goodsName = db.Column(db.String(64), index=True, unique=True)

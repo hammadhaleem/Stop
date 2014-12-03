@@ -29,7 +29,7 @@ def index( ):
    	'User By ID' : '/user/<userid',
    	'Add User' :  '/register/<username>/<password>/<email>/<phone>',
    	'Login' : '/login/<username>/<password>',
-   	'Add Product' : '/AddProduct/<Goodsid>/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>'
+   	'Add Product' : '/AddProduct/<Price : int >/<Pictureid: string>/<Longitude:float>/<Latitude:float>/<Goodsname>/<Goodsdescription>'
    	   	})
 
 @app.route('/product/<product>',methods = ['GET','POST'])
@@ -68,7 +68,6 @@ def upload():
     if file and allowed_file((file.filename).lower()):
         filename = secure_filename(file.filename).lower()
         t= file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        print t 
         return jsonify({
         'file' : url_for('uploaded_file',filename=filename),
         'name' : filename,
@@ -133,5 +132,4 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
 		db.session.commit()
 		return jsonify(good.getdata())
 	except Exception as e:
-		print e
 		jsonify({'status' : 'Error'})
