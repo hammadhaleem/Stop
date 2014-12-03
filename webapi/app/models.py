@@ -39,7 +39,7 @@ class User(db.Model):
         return (self.username)
 
 class Goods(db.Model):
-    __searchable__ = ['goodsName','goodsDescription']
+    #__searchable__ = ['goodsName','goodsDescription']
 
     goodsid = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Integer)
