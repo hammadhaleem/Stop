@@ -13,6 +13,7 @@ import pytesseract
 import tesseract
 import cv2
 import cv2.cv as cv
+import json
 import numpy as np
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
