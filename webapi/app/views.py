@@ -20,12 +20,6 @@ app.config['UPLOAD_FOLDER'] = 'uploads/'
 # These are the extension that we are accepting to be uploaded
 app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
-
-
-
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index( ):
@@ -53,20 +47,25 @@ def get_user_by_id(userid=0):
 	else:
 		return jsonify({})
 
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
+
 @app.route('/form')
 def index_upload():
     return str('<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"> </head> <body> <div class="container"> <div class="header"> <h3 class="text-muted"></h3> </div> <hr/> <div> <form action="upload" method="post" enctype="multipart/form-data"> <input type="file" name="file"><br /><br /> <input type="submit" value="Upload"> </form> </div> </div> </body> </html>')
 
 
 # Route that will process the file upload
-@app.route('/upload/', methods=['POST'])
+@app.route('/upload', methods=['POST'])
 @app.route('/upload', methods=['POST'])
 def upload():
-    username = request.form['username']
+    data = request.data
     file = request.files['file']
-
     if file and allowed_file((file.filename).lower()):
-        filename = secure_filename(file.filename+str(username)).lower()
+        filename = secure_filename(file.filename).lower()
         t= file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         print t 
         return jsonify({
@@ -77,16 +76,15 @@ def upload():
     else:
     	return(str("Error!!"))
 
-@app.route('/uploads/<username>/<filename>/')
-@app.route('/uploads/<username>/<filename>')
-def uploaded_file(filename,username):
-    filename = filename + username
+@app.route('/uploads/<filename>/')
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
     return send_from_directory('/home/engineer/htdocs/stop/webapi/uploads',filename)
     #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
 
-@app.route('/convert/<username>/<filename>/')
-@app.route('/convert/<username>/<filename>')
-def convert_file(filename,username):
+@app.route('/convert/<filename>/')
+@app.route('/convert/<filename>')
+def convert_file(filename):
     #path = str(app.config['UPLOAD_FOLDER']+filename)
     path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename).lower()
     try:
