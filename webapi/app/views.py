@@ -20,6 +20,12 @@ app.config['UPLOAD_FOLDER'] = 'uploads/'
 # These are the extension that we are accepting to be uploaded
 app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index( ):
@@ -47,18 +53,13 @@ def get_user_by_id(userid=0):
 	else:
 		return jsonify({})
 
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
-
-
 @app.route('/form')
 def index_upload():
     return str('<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"> </head> <body> <div class="container"> <div class="header"> <h3 class="text-muted"></h3> </div> <hr/> <div> <form action="upload" method="post" enctype="multipart/form-data"> <input type="file" name="file"><br /><br /> <input type="submit" value="Upload"> </form> </div> </div> </body> </html>')
 
 
 # Route that will process the file upload
+@app.route('/upload/', methods=['POST'])
 @app.route('/upload', methods=['POST'])
 def upload():
     data = request.data
@@ -75,12 +76,13 @@ def upload():
     else:
     	return(str("Error!!"))
 
+@app.route('/uploads/<filename>/')
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory('/home/engineer/htdocs/stop/webapi/uploads',filename)
     #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
 
-
+@app.route('/convert/<filename>/')
 @app.route('/convert/<filename>')
 def convert_file(filename):
     #path = str(app.config['UPLOAD_FOLDER']+filename)
@@ -111,7 +113,10 @@ def login(username,password):
 @app.route('/register/<username>/<password>/<email>/<phone>')
 def register(username,password,email,phone):
 	user = User()
-	user.Addpeople(username,password,email,phone)	
-	db.session.add(user)
-	db.session.commit()
-	return jsonify(user.getdata())
+	user.Addpeople(username,password,email,phone)
+	try :	
+		db.session.add(user)
+		db.session.commit()
+		return jsonify(user.getdata())
+	except :
+		return jsonify({'Status': 'Error'})
