@@ -154,13 +154,12 @@ def search(keyword=None):
 @app.route('/getpath/<cord>/', methods=['GET'])
 def route(cord = None):
 	cord = cord.split(";")
-	print cord
-
 	start = cord[0]
-	end = cord[len(cord)-1
+	end = cord[len(cord)-1]
 
-	start = str(start[0]) + ", "+str(start[1])
-	end   = str(end[0]) + ", "+str(end[1])
+	start = str(start)
+	end   = str(end)
+
 	string = " "
 	key = "AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
 	url = "https://maps.googleapis.com/maps/api/directions/json?origin="
