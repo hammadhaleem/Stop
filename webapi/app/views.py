@@ -53,21 +53,15 @@ def index_upload():
 # Route that will process the file upload
 @app.route('/upload', methods=['POST'])
 def upload():
-    # Get the name of the uploaded file
     file = request.files['file']
-    # Check if the file is one of the allowed types/extension
     if file and allowed_file((file.filename).lower()):
-        # Make the filename safe, remove unsupported chars
         filename = secure_filename(file.filename)
-        # Move the file form the temporal folder to
-        # the upload folder we setup
-
         t= file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        print t 
-        # Redirect the user to the uploaded_file route, which
-        # will basicaly show on the browser the uploaded file
-        return redirect(url_for('uploaded_file',
-                                filename=filename))
+        return {
+        'file' : url_for('uploaded_file',filename=filename),
+        'name' : filename,
+        'ocr'  : url_for('convert_file',filename=filename)
+        }
     else:
     	return(str("Error!!"))
 
