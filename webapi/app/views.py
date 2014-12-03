@@ -166,4 +166,4 @@ def route(cord = None):
 	url = url + start+'&destination'+end+'&waypoints=optimize:true|'+string+'&key='
 	url = url +key
 
-	return str(url)
+	return {'url':str(url)}
