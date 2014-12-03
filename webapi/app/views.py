@@ -62,7 +62,7 @@ def index_upload():
 @app.route('/upload/', methods=['POST'])
 @app.route('/upload', methods=['POST'])
 def upload():
-    username = request.files['username']
+    username = request.form['username']
     file = request.files['file']
 
     if file and allowed_file((file.filename).lower()):
