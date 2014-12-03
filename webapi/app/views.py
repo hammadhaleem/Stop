@@ -77,23 +77,19 @@ def uploaded_file(filename):
     #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
 
 
-
-
-
-
 @app.route('/convert/<filename>')
 def convert_file(filename):
     #path = str(app.config['UPLOAD_FOLDER']+filename)
-    path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename)
+    path = str('/home/engineer/htdocs/stop/webapi/uploads/'+filename).lower()
     fil = open(path,'r')
     image=cv.LoadImage(fil, cv.CV_LOAD_IMAGE_GRAYSCALE)
 
-	api = tesseract.TessBaseAPI()
-	api.Init(".","eng",tesseract.OEM_DEFAULT)
-	#api.SetPageSegMode(tesseract.PSM_SINGLE_WORD)
-	api.SetPageSegMode(tesseract.PSM_AUTO)
-	tesseract.SetCvImage(image,api)
-	text=api.GetUTF8Text()
-	conf=api.MeanTextConf()
-	return jsonify('output' : str(text))
-    #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
+    api = tesseract.TessBaseAPI()
+    api.Init(".","eng",tesseract.OEM_DEFAULT)
+    #api.SetPageSegMode(tesseract.PSM_SINGLE_WORD)
+    api.SetPageSegMode(tesseract.PSM_AUTO)
+    tesseract.SetCvImage(image,api)
+    text=api.GetUTF8Text()
+    conf=api.MeanTextConf()
+    return jsonify('output' : str(text))
+#return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
