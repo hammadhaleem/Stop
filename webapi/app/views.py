@@ -110,7 +110,8 @@ def login(username,password):
 @app.route('/register/<username>/<password>/<email>/<phone>/')
 @app.route('/register/<username>/<password>/<email>/<phone>')
 def register(username,password,email,phone):
-	user = User().Addpeople(username,password,email,phone)	
+	user = User()
+	user.Addpeople(username,password,email,phone)	
 	db.session.add(user)
 	db.session.commit()
 	return jsonify(user.getdata())
