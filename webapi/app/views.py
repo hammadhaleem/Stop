@@ -29,7 +29,7 @@ def index( ):
    	'User By ID' : '/user/<userid',
    	'Add User' :  '/register/<username>/<password>/<email>/<phone>',
    	'Login' : '/login/<username>/<password>',
-   	'Add Product' : '/AddProduct/<Price : int >/<Pictureid: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>',
+   	'Add Product' : '/AddProduct/<Price : int >/<PictureName: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>',
    	'Search':'/search/<product-name>',
    	'Route':'/getpath/long,lat;long,lat;long,lat;long,lat;long,lat/'
    	 
@@ -125,11 +125,11 @@ def register(username,password,email,phone):
 		return jsonify({'Status': 'Error'})
 
 
-@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/')
-@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>')
-def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
+@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>')
+@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/')
+def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address):
 	good = Goods()
-	good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription)
+	good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address)
 	try:
 		db.session.add(good)
 		db.session.commit()

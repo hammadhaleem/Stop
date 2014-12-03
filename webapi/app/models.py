@@ -5,7 +5,7 @@ from app import app
 
 class User(db.Model):
     __tablename__ = 'users'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
@@ -45,25 +45,28 @@ class Goods(db.Model):
     latitude = db.Column(db.Float)
     goodsname = db.Column(db.String(64), index=True, unique=True)
     goodsdescription = db.Column(db.String(1400))
+    address = db.Column(db.String(1400))
     data = {}
 
-    def GoodsInformation(self,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription):
+    def GoodsInformation(self,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address):
         self.pictureId = Pictureid
         self.longitude = Longitude
         self.latitude = Latitude
         self.price = Price
         self.goodsname = Goodsname
         self.goodsdescription = Goodsdescription
+        self.address = address
     
     def getdata(self):
         data = {
             'goodsid' : self.goodsid, 
             'price' : self.price,
-            'pictureId' : self.pictureId,
+            'pictureName' : self.pictureId,
             'longitude' :self.longitude,
             'latitude' : self.latitude,
             'goodsName' :self.goodsname,
-            'goodsDescription' :self.goodsdescription
+            'goodsDescription' :self.goodsdescription,
+            'address' : self.address
         }
         return data
 
