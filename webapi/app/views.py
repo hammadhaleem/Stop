@@ -117,15 +117,15 @@ def conver_file_advance(filename):
 	gray = cv2.addWeighted(abs_grad_x,0.5,abs_grad_y,0.5,0)
 	image1 = cv2.medianBlur(gray,5) 
 	image1[image1 < 50]= 255
-	image1 = cv2.GaussianBlur(image1,(31,13),0)     
+	image1 = cv2.GaussianBlur(image1,(31,13),0)
 	color_offset=230
 	image1[image1 >= color_offset]= 255  
-	image1[image1 < color_offset ] = 0      #black
+	image1[image1 < color_offset ] = 0
 
 	offset=30
 	height,width = image1.shape
 	image1=cv2.copyMakeBorder(image1,offset,offset,offset,offset,cv2.BORDER_CONSTANT,value=(255,255,255)) 
-	cv2.imwrite("an91cut_decoded.jpg",image1)
+	cv2.imwrite(path+str('_decoded'),image1)
 	### tesseract OCR
 	api = tesseract.TessBaseAPI()
 	api.Init(".","eng",tesseract.OEM_DEFAULT)
@@ -138,5 +138,5 @@ def conver_file_advance(filename):
 	text=api.GetUTF8Text()
 	conf=api.MeanTextConf()
 	image=None
-	print str(text)
+	print str(text),str(conf)
 	return str(text)
