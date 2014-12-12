@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">StopForAndroid</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Fuck Github!Haha!!!!~</string>
+    <string name="search_title">search now!</string>
+    <string name="string_my_added">MyAdded</string>
+    <string name="string_my_uploaded">MyUploaded</string>
+    <string name="string_overflow">More</string>
+    <string name="string_query_hint">Enter a name</string>
+
+    <!-- login and register -->
+    <string name="string_user_name">username: </string>
+    <string name="string_user_password">password: </string>
+    <string name="string_user_email">email: </string>
+    <string name="string_user_phone">mobile:</string>
+    <string name="string_login_button">Log In</string>
+    <string name="string_logout_button">Log Out</string>
+    <string name="string_register_button">Register</string>
+    <string name="string_go_back">back</string>
+    <string name="string_hint_username">4~10 characters</string>
+    <string name="string_hint_password">6~15 characters</string>
+    <string name="string_repeat_pwd">repeat\npassword: </string>
+
+    <!-- refreshable view -->
+    <string name="pull_to_refresh">pull to refresh</string>
+    <string name="release_to_refresh">release to refresh</string>
+    <string name="refreshing">refreshing……</string>
+    <string name="not_updated_yet">no update recently</string>
+    <string name="updated_at">last update before %1$s</string>
+    <string name="updated_just_now">just update recently</string>
+    <string name="time_error">time error</string>
+    <string name="pull_to_load">loading……</string>
+    
+    <!-- addedGoodsActivity -->
+    <string name="deleteAddedGoods">delete</string>
+    <string name="addMoreGoods">add more</string> 
+    <string name="take_picture">Take Picture</string>
+    <string name="delete">Delete Picture</string>
+    <string name="string_reset">Reset</string>
+    <string name="string_save">Save</string>
+	<string name="string_hint_productName">Input Product Name</string>
+	<string name="string_hint_productDescription">Describe product</string>
+	<string name="string_hint_productPrice">Set Price</string>
+	<string name="string_blank_words"> </string>
+    
+    <!-- searchListActivity -->
+    <string name="save">save</string>
+    <string name="showOnMap">show on map</string>
+
+</resources>

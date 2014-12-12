@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FavoriteGoodsListActivity" >
+
+    <hk.ust.stop.widget.RefreshableView
+        android:id="@+id/refreshable_view_favoritegoodslist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/bottomView" >
+
+        <ListView
+            android:id="@+id/android:list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="none" >
+        </ListView>
+        
+    </hk.ust.stop.widget.RefreshableView>
+    
+    <LinearLayout
+        android:id="@+id/bottomView"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+	    <Button
+	        android:id="@+id/delete"
+	        android:layout_width="80dp"
+	        android:layout_height="40dp"
+	        android:gravity="center"
+	        android:text="@string/deleteAddedGoods"
+	        android:textSize="16sp"
+	        android:onClick="deleteOnClickListener" >
+	    </Button>
+	    
+	    <Button
+	        android:id="@+id/showOnMap"
+	        android:layout_width="150dp"
+	        android:layout_height="40dp"
+	        android:layout_marginLeft="30dp"
+	        android:gravity="center"
+	        android:text="@string/showOnMap"
+	        android:textSize="16sp"
+	        android:onClick="showOnMapOnClickListener" >
+	    </Button>
+	    
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,11 @@
+2014.10.28:
+version 1.0 - accomplish self-location function(two methods: one is current, the other is depleted)
+version 2.0 - combine content provider, SQLlite, and MyFavorListActivity with updating/loading animation
+2014.11.13
+version 2.1 - combine updating and loading function into one self-defined widget  
+2014.11.25
+version 2.2 - fix out bugs of self-defined widget
+version 2.3 - merge file
+2014.11.27
+version 2.4 - create activity for seller to view selling-list(addedGoodsListActivity), promote checkBox
+version 2.5 - create activity for user to view favorite-list(FavoriteGoodsListActivity)

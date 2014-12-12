@@ -1,0 +1,73 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    
+    <LinearLayout
+        android:id="@+id/username_linearlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true">
+        
+        <TextView 
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/string_user_name"/>
+        
+        <EditText
+            android:id="@+id/edittext_user_name"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:inputType="text"/>
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/user_password_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username_linearlayout"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true">
+        
+        <TextView 
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/string_user_password"/>
+        
+        <EditText 
+            android:id="@+id/edittext_user_password"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_password_layout"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+        <Button 
+            android:id="@+id/button_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/string_login_button"/>
+        
+        <Button 
+            android:id="@+id/button_register"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/string_register_button"/>
+    </LinearLayout>
+</RelativeLayout>

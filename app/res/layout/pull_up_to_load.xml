@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pull_to_load_foot"
+    android:layout_width="fill_parent"
+    android:layout_height="60dip" >
+    
+     <LinearLayout 
+        android:layout_width="200dip"
+        android:layout_height="60dip"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal" >
+        
+         <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="60dip"
+            android:layout_weight="3"
+            android:gravity="center" >
+            
+            <ProgressBar
+                android:layout_width="30dip"
+                android:layout_height="30dip" /> 
+             
+         </LinearLayout>
+            
+         <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="60dip"
+            android:layout_weight="12"
+            android:gravity="center" >
+            
+            <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="30dip"
+		        android:gravity="center"
+		        android:text="@string/pull_to_load" />
+             
+         </LinearLayout>
+         
+     </LinearLayout>
+
+</RelativeLayout>
