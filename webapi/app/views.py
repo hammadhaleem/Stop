@@ -177,8 +177,6 @@ def route(cord = None):
 
   for i in cord:
     string = string+","+i
-  print string
-  print cord
 
   key = "AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
   url = "https://maps.googleapis.com/maps/api/directions/json?origin="
@@ -189,9 +187,6 @@ def route(cord = None):
   data['url'] = url
   if data['status'] == 'ZERO_RESULTS' or data['status'] == 'NOT_FOUND':
     return jsonify(data)
-  else:
-    return url
-
   string  = ""
   da = {}
   keys = []
@@ -216,4 +211,4 @@ def route(cord = None):
         final[count][key] = value  
 
     count = count + 1 
-  return str(final)
+  return jsonify(final)
