@@ -9,19 +9,19 @@ from .models import User, Goods
 from werkzeug import secure_filename
 import os 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-#import Image
-#import cv2.cv as cv
-#import tesseract
-#import pytesseract
-#import tesseract
-#import cv2
-#import cv2.cv as cv
+import Image
+import cv2.cv as cv
+import tesseract
+import pytesseract
+import tesseract
+import cv2
+import cv2.cv as cv
 import json
 import sys
 from bs4 import BeautifulSoup
 import requests
 import json
-#import numpy as np
+import numpy as np
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 # These are the extension that we are accepting to be uploaded
