@@ -169,10 +169,17 @@ def route(cord = None):
   cord = cord.split(";")
   start = cord[0]
   end = cord[len(cord)-1]
-
+  cord.pop(0)
+  cord.pop(len(cord)-1)
   start = str(start)
   end   = str(end)
   string = ""
+
+  for i in cord:
+    string = string+","+i
+  print string
+  print cord
+
   key = "AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
   url = "https://maps.googleapis.com/maps/api/directions/json?origin="
   url = url + start+'&destination='+end+'&waypoints=optimize:true|'+string+'&key='
@@ -180,6 +187,11 @@ def route(cord = None):
   r = requests.get(url)
   data = dict(json.loads(str(r.content)))
   data['url'] = url
+  if data['status'] == 'ZERO_RESULTS' or data['status'] == 'NOT_FOUND':
+    return jsonify(data)
+  else:
+    return url
+
   string  = ""
   da = {}
   keys = []
