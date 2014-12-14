@@ -185,7 +185,23 @@ def route(cord = None):
   keys = []
   for objects in data['routes']:
     for key,value in objects.items():
-     da[key] = value
-     keys.append(key)
-  da['key'] =str(list(set(keys)))
-  return jsonify(da)
+      if key =="legs":
+        da[key] = value
+        steps = {}
+        for dic in value:
+          dic = dict(dic)
+          for key,value in dic.items():
+            steps[key] = value
+  count = 1
+  data = {}
+  final = {}
+  list_keys = ['distance','duration','start_location','end_location','html_instructions']
+  for objects in steps['steps']:
+    data[count] = objects
+    final[count] = {}
+    for key,value in data[count].items():
+      if key in list_keys:
+        final[count][key] = value  
+
+    count = count + 1 
+  return str(final)
