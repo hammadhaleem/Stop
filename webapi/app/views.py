@@ -38,7 +38,8 @@ def index( ):
    	'Login' : '/login/<username>/<password>',
    	'Add Product' : '/AddProduct/<Price : int >/<PictureName: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>/<address : text>',
    	'Search':'/search/<product-name>',
-   	'Route':'/getpath/long,lat;long,lat;long,lat;long,lat;long,lat/'
+   	'Route':'/getpath/long,lat;long,lat;long,lat;long,lat;long,lat/',
+    'Analyse' : '/convert/<filename>'
    	 
    	 })
 
