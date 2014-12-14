@@ -14,6 +14,10 @@ import tesseract
 import cv2
 import cv2.cv as cv
 import json
+import sys
+from bs4 import BeautifulSoup
+import requests
+import json
 import numpy as np
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
@@ -153,17 +157,18 @@ def search(keyword=None):
 @app.route('/getpath/<cord>', methods=['GET'])
 @app.route('/getpath/<cord>/', methods=['GET'])
 def route(cord = None):
-	cord = cord.split(";")
-	start = cord[0]
-	end = cord[len(cord)-1]
+  cord = cord.split(";")
+  start = cord[0]
+  end = cord[len(cord)-1]
 
-	start = str(start)
-	end   = str(end)
+  start = str(start)
+  end   = str(end)
 
-	string = " "
-	key = "AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
-	url = "https://maps.googleapis.com/maps/api/directions/json?origin="
-	url = url + start+'&destination'+end+'&waypoints=optimize:true|'+string+'&key='
-	url = url +key
-
-	return {'url':str(url)}
+  string = " "
+  key = "AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
+  url = "https://maps.googleapis.com/maps/api/directions/json?origin="
+  url = url + start+'&destination'+end+'&waypoints=optimize:true|'+string+'&key='
+  url = url +key
+  r = requests.get(url)
+  data = r.text
+  return jsonify(str(data))
