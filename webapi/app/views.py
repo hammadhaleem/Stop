@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from flask import render_template, flash, redirect, session, url_for, request
 from flask import jsonify
 from datetime import datetime
@@ -6,19 +9,19 @@ from .models import User, Goods
 from werkzeug import secure_filename
 import os 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-import Image
-import cv2.cv as cv
-import tesseract
-import pytesseract
-import tesseract
-import cv2
-import cv2.cv as cv
+#import Image
+#import cv2.cv as cv
+#import tesseract
+#import pytesseract
+#import tesseract
+#import cv2
+#import cv2.cv as cv
 import json
 import sys
 from bs4 import BeautifulSoup
 import requests
 import json
-import numpy as np
+#import numpy as np
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 # These are the extension that we are accepting to be uploaded
@@ -31,7 +34,7 @@ def index( ):
    	"Pages": "list of pages",
    	'Product By ID ' : '/product/<product-id>',
    	'User By ID' : '/user/<userid',
-   	'Add User' :  '/register/<username>/<password>/<email>/<phone>',
+   	'Add User' :  '/register/<username>/<email>/<phone_number>/<password>',
    	'Login' : '/login/<username>/<password>',
    	'Add Product' : '/AddProduct/<Price : int >/<PictureName: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>/<address : text>',
    	'Search':'/search/<product-name>',
@@ -110,17 +113,22 @@ def convert_file(filename):
 @app.route('/login/<username>/<password>/')
 @app.route('/login/<username>/<password>')
 def login(username,password):
-	user = User.query.filter_by(username = username).all()
-	if len(user) > 0 :
-		return jsonify(user[0].getdata())
-	else:
-		return jsonify({})
+  user = User.query.filter_by(username = username).all()
+  if len(user) > 0 :
+    data = user[0].getdata()
+    if data['password'] == password : 
+      return jsonify(data)
+    else:
+      return jsonify({})
+  else:
+    return jsonify({})
 
-@app.route('/register/<username>/<password>/<email>/<phone>/')
-@app.route('/register/<username>/<password>/<email>/<phone>')
-def register(username,password,email,phone):
+@app.route('/register/<username>/<email>/<phone_number>/<password>/')
+@app.route('/register/<username>/<email>/<phone_number>/<password>')
+
+def register(username,email,phone_number,password):
 	user = User()
-	user.Addpeople(username,password,email,phone)
+	user.Addpeople(username,email,phone_number,password)
 	try :	
 		db.session.add(user)
 		db.session.commit()
@@ -164,12 +172,20 @@ def route(cord = None):
 
   start = str(start)
   end   = str(end)
-
-  string = " "
+  string = ""
   key = "AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
   url = "https://maps.googleapis.com/maps/api/directions/json?origin="
-  url = url + start+'&destination'+end+'&waypoints=optimize:true|'+string+'&key='
+  url = url + start+'&destination='+end+'&waypoints=optimize:true|'+string+'&key='
   url = url +key
   r = requests.get(url)
-  data = r.text
-  return jsonify(str(data))
+  data = dict(json.loads(str(r.content)))
+  data['url'] = url
+  string  = ""
+  da = {}
+  keys = []
+  for objects in data['routes']:
+    for key,value in objects.items():
+     da[key] = value
+     keys.append(key)
+  da['key'] =str(list(set(keys)))
+  return jsonify(da)
