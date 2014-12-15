@@ -194,9 +194,10 @@ def delete(product= None):
     db.session.commit()
     obj = Goods.query.filter_by(goodsid = product)
     db.session.commit()
-    for i in obj:
-      db.session.delete(i)
+    #for i in obj:
+    #  db.session.delete(i)
     db.session.commit()
+    return jsonify(obj.getdata())
     return jsonify({'status' : 'deleted'})
 
 @app.route('/register/<username>/<email>/<phone_number>/<password>/')
