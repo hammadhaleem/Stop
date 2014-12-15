@@ -190,11 +190,18 @@ def delete(product= None):
     return jsonify({'status' : 'error'})
   else:
     db.session.flush()
-    obj = Goods.query.filter_by(goodsid = product).first()
-    obj.delete_it()
-    db.session.commit()
+    product= product.split(';')
+    lis = []
+    for i in product:
+      try:
+        obj = Goods.query.filter_by(goodsid = i).first()
+        obj.delete_it()
+        lis.append(obj.goodsname)
+        db.session.commit()
+      except:
+        pass
     db.session.flush()
-    return jsonify({'status' : 'deleted'})
+    return jsonify({'status' : str(list(set(lis)))})
 
 @app.route('/undo/<product>')
 @app.route('/undo/<product>/')
