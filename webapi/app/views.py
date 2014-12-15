@@ -190,12 +190,25 @@ def delete(product= None):
   if product is None :
     return jsonify({'status' : 'error'})
   else:
-    db.session.rollback()
-    db.session.commit()
-    obj = Goods.query.filter_by(goodsid = product).first()
-    obj.delete = 1
+    obj = Goods.query.filter_by(goodsid = product)
+    for i in obj:
+      i.delete = 1 
     db.session.commit()
     return jsonify({'status' : 'deleted'})
+
+@app.route('/undo/<product>')
+@app.route('/undo/<product>/')
+def undo(product= None):
+  if product is None :
+    return jsonify({'status' : 'error'})
+  else:
+    obj = Goods.query.filter_by(goodsid = product)
+    for i in obj:
+      i.delete = 0
+    db.session.commit()
+    return jsonify({'status' : 'deleted'})
+
+
 
 @app.route('/register/<username>/<email>/<phone_number>/<password>/')
 @app.route('/register/<username>/<email>/<phone_number>/<password>')
