@@ -193,7 +193,7 @@ def delete(product= None):
     db.session.rollback()
     db.session.commit()
     obj = Goods.query.filter_by(goodsid = product)
-    
+    db.session.commit()
     for i in obj:
       db.session.delete(i)
     db.session.commit()
