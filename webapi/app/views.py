@@ -202,7 +202,8 @@ def delete(product= None):
         result = db.engine.execute(sql)
         lis.append(obj.goodsname)
         db.session.commit()
-      except:
+      except Exception as e:
+        print e
         pass
     db.session.flush()
     return jsonify({'status' : str(list(set(lis)))})
@@ -225,7 +226,8 @@ def undo(product= None):
         result = db.engine.execute(sql)
         lis.append(obj.goodsname)
         db.session.commit()
-      except:
+      except Exception as e :
+        print e
         pass
     db.session.flush()
     return jsonify({'status' : str(list(set(lis)))})
