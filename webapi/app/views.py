@@ -253,14 +253,13 @@ def register(username,email,phone_number,password):
 @app.route('/get/<userid>')
 @app.route('/get/<userid>/')
 def get_added_good(userid):
-  lis = {}
+  lis = []
   if userid is None: 
     return jsonify({'status' : 'error'})
   goods = Goods.query.filter_by(userid = userid).all()
-  count = 0 
   for i in goods : 
-    lis[count] = i.getdata()
-  return jsonify(lis)
+    lis.append(i.getdata())
+  return jsonify({"objects" : lis})
 
 @app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
 @app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
