@@ -190,9 +190,8 @@ def delete(product= None):
   if product is None :
     return jsonify({'status' : 'error'})
   else:
-    obj = Goods.query.filter_by(goodsid = product)
-    for i in obj:
-      i.delete = 1 
+    obj = Goods.query.filter_by(goodsid = product).first()
+    obj.delete = 1 
     db.session.commit()
     return jsonify({'status' : 'deleted'})
 
@@ -202,9 +201,8 @@ def undo(product= None):
   if product is None :
     return jsonify({'status' : 'error'})
   else:
-    obj = Goods.query.filter_by(goodsid = product)
-    for i in obj:
-      i.delete = 0
+    obj = Goods.query.filter_by(goodsid = product).first()
+    obj.delete = 1 
     db.session.commit()
     return jsonify({'status' : 'deleted'})
 
