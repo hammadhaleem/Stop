@@ -71,6 +71,11 @@ class Goods(db.Model):
             'address' : self.address
         }
         return data
+    def delete_it(self):
+        self.delete = 1 
+
+    def undo(self):
+        self.delete = 0
 
     def __repr__(self):
         return '<Goods %r>' % (self.goodsname)
