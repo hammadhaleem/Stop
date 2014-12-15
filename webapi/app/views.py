@@ -125,7 +125,10 @@ def bar_Code(filename):
 
   # wrap image data
   image = zbar.Image(width, height, 'Y800', raw)
+  canner = zbar.ImageScanner()
 
+  # configure the reader
+  scanner.parse_config('enable')
   # scan the image for barcodes
   scanner.scan(image)
   string = ""
