@@ -44,23 +44,6 @@ def index( ):
    	 
    	 })
 
-@app.route('/product/<product>',methods = ['GET','POST'])
-def get_product_by_id(product=0):
-	good = Goods.query.filter_by(goodsid= product).all()
-	if len(good)  > 0 :
-		return jsonify(good[0].getdata())
-	else : 
-		return jsonify({})
-
-@app.route('/user/<userid>',methods = ['GET','POST'])
-def get_user_by_id(userid=0):
-	user = User.query.filter_by(id = userid).all()
-	if len(user) > 0 :
-		return jsonify(user[0].getdata())
-	else:
-		return jsonify({})
-
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
@@ -93,7 +76,7 @@ def upload():
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory('/home/engineer/htdocs/stop/webapi/uploads',filename)
-    #return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
+
 @app.route('/barcode/<filename>')
 @app.route('/barcode/<filename>')
 def bar_Code(filename):
@@ -183,16 +166,35 @@ def login(username,password):
       return jsonify({})
   else:
     return jsonify({})
+
+@app.route('/product/<product>',methods = ['GET','POST'])
+def get_product_by_id(product=0):
+  good = Goods.query.filter_by(goodsid= product).all()
+  if len(good)  > 0 :
+    return jsonify(good[0].getdata())
+  else : 
+    return jsonify({})
+
+@app.route('/user/<userid>',methods = ['GET','POST'])
+def get_user_by_id(userid=0):
+  user = User.query.filter_by(id = userid).all()
+  if len(user) > 0 :
+    return jsonify(user[0].getdata())
+  else:
+    return jsonify({})
+
+
 @app.route('/delete/<product>')
 @app.route('/delete/<product>/')
 def delete(product= None):
   if product is None :
     return jsonify({'status' : 'error'})
   else:
-    obj = Goods.query.filter_by(goodsid = product).first()
+    obj = Goods.query.filter_by(goodsid = product)
     db.session.commit()
     db.session.rollback()
-    db.session.delete(obj)
+    for i in obj;
+      db.session.delete(i)
     db.session.commit()
     return jsonify({'status' : 'deleted'})
 
