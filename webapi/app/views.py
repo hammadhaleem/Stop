@@ -21,6 +21,7 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import numpy as np
+import zbar
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 # These are the extension that we are accepting to be uploaded
