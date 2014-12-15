@@ -39,7 +39,8 @@ def index( ):
    	'Add Product' : '/AddProduct/<Price : int >/<PictureName: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>/<address : text>',
    	'Search':'/search/<product-name>',
    	'Route':'/getpath/long,lat;long,lat;long,lat;long,lat;long,lat/',
-    'Analyse' : '/convert/<filename>'
+    'Analyse' : '/convert/<filename>',
+    'delete' : '/delete/<product-id>'
    	 
    	 })
 
@@ -131,9 +132,26 @@ def bar_Code(filename):
   # draw a bounding box arounded the detected barcode and display the
   # image
   cv2.drawContours(image, [box], -1, (0, 255, 0), 3)
-  cv2.imwrite('image.png',image[box])
+  
+  x,y,w,h = cv2.boundingRect([box])
+  roi = img[y:y+h,x:x+w]  
+  cv2.imwrite('image.png',roi)
+  pil = Image.open('image.png').convert('L')
+  width, height = pil.size
+  raw = pil.tostring()
 
-  return image
+  # wrap image data
+  image = zbar.Image(width, height, 'Y800', raw)
+
+  # scan the image for barcodes
+  scanner.scan(image)
+  string = ""
+  # extract results
+  for symbol in image:
+      # do something useful with results
+      string = string + 'decoded' +  str(symbol.type) + ' symbol ' +  str(symbol.data) + "\n"
+  return str(string)
+
 
 @app.route('/convert/<filename>/')
 @app.route('/convert/<filename>')
@@ -165,6 +183,16 @@ def login(username,password):
       return jsonify({})
   else:
     return jsonify({})
+@app.route('/delete/<product>')
+@app.route('/delete/<product>/')
+def delete(product= None):
+  if product is None :
+    return jsonify({'status' : 'error'})
+  else:
+    good = Goods.query.filter_by(goodsid= product).first()
+    db.session.delete(good)
+    db.session.commit()
+    return jsonify({'status' : 'deleted'})
 
 @app.route('/register/<username>/<email>/<phone_number>/<password>/')
 @app.route('/register/<username>/<email>/<phone_number>/<password>')
