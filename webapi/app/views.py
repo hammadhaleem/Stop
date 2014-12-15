@@ -115,7 +115,7 @@ def bar_Code(filename):
   # draw a bounding box arounded the detected barcode and display the
   # image
   cv2.drawContours(image, [box], -1, (0, 255, 0), 3)
-  cv2.imwrite(path+'_bar',image)
+  cv2.imwrite(path+'_bar.jpg',image)
   pil = Image.open(path+'_bar.jpg').convert('L')
   width, height = pil.size
   raw = pil.tostring()
