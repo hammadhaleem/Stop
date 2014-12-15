@@ -190,8 +190,8 @@ def delete(product= None):
   if product is None :
     return jsonify({'status' : 'error'})
   else:
-    db.session.commit()
     db.session.rollback()
+    db.session.commit()
     obj = Goods.query.filter_by(goodsid = product)
     
     for i in obj:
