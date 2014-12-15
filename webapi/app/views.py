@@ -23,6 +23,7 @@ import json
 import numpy as np
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
+# These are the extension that we are accepting to be uploaded
 app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 @app.route('/', methods=['GET', 'POST'])
@@ -190,7 +191,6 @@ def delete(product= None):
   else:
     obj = Goods.query.filter_by(goodsid = product).first()
     obj.delete_it()
-    db.session.add(obj)
     db.session.commit()
     return jsonify({'status' : 'deleted'})
 
@@ -202,7 +202,6 @@ def undo(product= None):
   else:
     obj = Goods.query.filter_by(goodsid = product).first()
     obj.undo()
-    db.session.add(obj)
     db.session.commit()
     return jsonify({'status' : 'deleted'})
 
