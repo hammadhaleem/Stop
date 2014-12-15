@@ -11,8 +11,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import Image
 import cv2.cv as cv
-import tesseract
-import pytesseract
+import tesseract ,  pytesseract
 import tesseract
 import cv2
 import cv2.cv as cv
@@ -24,7 +23,6 @@ import json
 import numpy as np
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
-# These are the extension that we are accepting to be uploaded
 app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 @app.route('/', methods=['GET', 'POST'])
@@ -192,6 +190,7 @@ def delete(product= None):
   else:
     obj = Goods.query.filter_by(goodsid = product).first()
     obj.delete_it()
+    db.session.add(obj)
     db.session.commit()
     return jsonify({'status' : 'deleted'})
 
@@ -203,6 +202,7 @@ def undo(product= None):
   else:
     obj = Goods.query.filter_by(goodsid = product).first()
     obj.undo()
+    db.session.add(obj)
     db.session.commit()
     return jsonify({'status' : 'deleted'})
 
