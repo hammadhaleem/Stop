@@ -259,7 +259,7 @@ def get_added_good(userid):
   goods = Goods.query.filter_by(userid = userid).all()
   for i in goods : 
     lis.append(i.getdata())
-  return jsonify({"objects" : str(lis)})
+  return jsonify({"objects" : lis})
 
 @app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
 @app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
