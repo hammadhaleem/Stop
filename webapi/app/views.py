@@ -192,6 +192,7 @@ def delete(product= None):
     db.session.flush()
     product= product.split(';')
     lis = []
+    print product
     for i in product:
       try:
         obj = Goods.query.filter_by(goodsid = i).first()
