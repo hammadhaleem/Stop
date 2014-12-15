@@ -230,15 +230,25 @@ def register(username,email,phone_number,password):
 	except :
 		return jsonify({'Status': 'Error'})
 
-
-@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>')
-@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/')
-def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address):
+@app.route('/get/<userid>')
+@app.route('/get/<userid>/')
+def get_added_good(userid):
+  lis = []
+  if userid is null : 
+    return jsonify({'status' : 'error'})
+  goods = Goods.query.filter_by(userid = userid)
+  for i in goods : 
+    lis.append(i.getdata())
+  return jsonify({"data" : str(lis)})
+@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
+@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
+def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid):
 	good = Goods()
-	good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address)
+	good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid)
 	try:
 		db.session.add(good)
 		db.session.commit()
+    db.session.flush()
 		return jsonify(good.getdata())
 	except Exception as e:
 		print e
