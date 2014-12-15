@@ -237,7 +237,7 @@ def get_added_good(userid):
   lis = []
   if userid is None: 
     return jsonify({'status' : 'error'})
-  goods = Goods.query.filter_by(userid = userid)
+  goods = Goods.query.filter_by(userid = userid).all()
   for i in goods : 
     lis.append(i.getdata())
   return jsonify({"data" : str(lis)})
