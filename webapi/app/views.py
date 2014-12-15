@@ -9,7 +9,7 @@ from .models import User, Goods
 from werkzeug import secure_filename
 import os 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-import Image
+from PIL import Image
 import cv2.cv as cv
 import tesseract ,  pytesseract
 import tesseract
