@@ -71,6 +71,7 @@ class Goods(db.Model):
             'address' : self.address
         }
         return data
+        
     def delete_it(self):
         self.delete = 1 
 
