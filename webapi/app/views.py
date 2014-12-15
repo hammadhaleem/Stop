@@ -256,9 +256,10 @@ def get_added_good(userid):
   lis = []
   if userid is None: 
     return jsonify({'status' : 'error'})
-  goods = Goods.query.filter_by(userid = userid, delete = 0).all()
+  goods = Goods.query.filter_by(userid = userid).all()
   for i in goods : 
-    lis.append(i.getdata())
+    if i.delete == 0 :
+      lis.append(i.getdata())
   return jsonify({"objects" : lis})
 
 @app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')

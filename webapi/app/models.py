@@ -71,7 +71,8 @@ class Goods(db.Model):
             'goodsName' :self.goodsname,
             'goodsDescription' :self.goodsdescription,
             'address' : self.address,
-            'userid' : self.userid
+            'userid' : self.userid,
+            'delete' : self.delete
         }
         return data
         
