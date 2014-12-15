@@ -35,11 +35,12 @@ def index( ):
    	'User By ID' : '/user/<userid',
    	'Add User' :  '/register/<username>/<email>/<phone_number>/<password>',
    	'Login' : '/login/<username>/<password>',
-   	'Add Product' : '/AddProduct/<Price : int >/<PictureName: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>/<address : text>',
+   	'Add Product' : '/AddProduct/<Price : int >/<PictureName: string>/<Longitude:float>/<Latitude:float>/<Goodsname:string>/<Goodsdescription:text>/<address : text>/<userid>',
    	'Search':'/search/<product-name>',
    	'Route':'/getpath/long,lat;long,lat;long,lat;long,lat;long,lat/',
     'Analyse' : '/convert/<filename>',
-    'delete' : '/delete/<product-id>'
+    'delete' : '/delete/<product-id>',
+    'show-products' : '/get/<userid>'
    	 
    	 })
 
@@ -240,6 +241,7 @@ def get_added_good(userid):
   for i in goods : 
     lis.append(i.getdata())
   return jsonify({"data" : str(lis)})
+
 @app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
 @app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
 def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid):
