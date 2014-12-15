@@ -18,26 +18,21 @@ from flask.ext.admin import Admin
 import logging
 from logging.handlers import RotatingFileHandler
 
+app = Flask(__name__)
+app.config.from_object('config')
+db = SQLAlchemy(app)
+oid = OpenID(app, os.path.join(basedir, 'tmp'))
+
+
+
 from models import Goods, User
 from app import views, models
-
 
 class FedoraModelView(sqla.ModelView):
     column_display_pk = True
     column_display_pk = True
 
-    
-app = Flask(__name__)
-app.config.from_object('config')
-db = SQLAlchemy(app)
-db.init_app(app) 
-oid = OpenID(app, os.path.join(basedir, 'tmp'))
-
-
-
 admin = Admin(app)
 admin.add_view(FedoraModelView(User, db.session))
 admin.add_view(FedoraModelView(Goods, db.session))
 whooshalchemy.whoosh_index(app, Goods)
-
-from app import views, models
