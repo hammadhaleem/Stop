@@ -169,7 +169,7 @@ def login(username,password):
 
 @app.route('/product/<product>',methods = ['GET','POST'])
 def get_product_by_id(product=0):
-  good = Goods.query.filter_by(goodsid= product).all()
+  good = Goods.query.filter_by(goodsid= product, delete = 0 ).all()
   if len(good)  > 0 :
     return jsonify(good[0].getdata())
   else : 
@@ -192,12 +192,9 @@ def delete(product= None):
   else:
     db.session.rollback()
     db.session.commit()
-    obj = Goods.query.filter_by(goodsid = product)
+    obj = Goods.query.filter_by(goodsid = product).first()
+    obj.delete = 1
     db.session.commit()
-    #for i in obj:
-    #  db.session.delete(i)
-    db.session.commit()
-    return jsonify(obj.getdata())
     return jsonify({'status' : 'deleted'})
 
 @app.route('/register/<username>/<email>/<phone_number>/<password>/')

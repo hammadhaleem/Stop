@@ -46,6 +46,7 @@ class Goods(db.Model):
     goodsname = db.Column(db.String(64), index=True, unique=True)
     goodsdescription = db.Column(db.String(1400))
     address = db.Column(db.String(1400))
+    delete = db.Column(db.Integer)
     data = {}
 
     def GoodsInformation(self,Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address):
@@ -56,6 +57,7 @@ class Goods(db.Model):
         self.goodsname = Goodsname
         self.goodsdescription = Goodsdescription
         self.address = address
+        self.delete = 0
     
     def getdata(self):
         data = {
