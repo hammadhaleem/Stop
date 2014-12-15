@@ -131,7 +131,7 @@ def bar_Code(filename):
   scanner.parse_config('enable')
   # scan the image for barcodes
   scanner.scan(image)
-  string = ""
+  string = "result : "
   # extract results
   for symbol in image:
       # do something useful with results
