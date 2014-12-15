@@ -235,7 +235,7 @@ def register(username,email,phone_number,password):
 @app.route('/get/<userid>/')
 def get_added_good(userid):
   lis = []
-  if userid is null : 
+  if userid is None: 
     return jsonify({'status' : 'error'})
   goods = Goods.query.filter_by(userid = userid)
   for i in goods : 
