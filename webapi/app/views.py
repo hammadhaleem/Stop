@@ -198,7 +198,7 @@ def delete(product= None):
       try:
         obj = Goods.query.filter_by(goodsid = i).first()
         obj.delete_it()
-        sql = text('update goods set `delete` = 1 where `goodsid` ='+str(i)+'')
+        sql = str('update goods set `delete` = 1 where `goodsid` ='+str(i)+'')
         result = db.engine.execute(sql)
         lis.append(obj.goodsname)
         db.session.commit()
@@ -222,7 +222,7 @@ def undo(product= None):
       try:
         obj = Goods.query.filter_by(goodsid = i).first()
         obj.delete_it()
-        sql = text('update goods set `delete` = 0 where `goodsid` ='+str(i)+'')
+        sql = str('update goods set `delete` = 0 where `goodsid` ='+str(i)+'')
         result = db.engine.execute(sql)
         lis.append(obj.goodsname)
         db.session.commit()
