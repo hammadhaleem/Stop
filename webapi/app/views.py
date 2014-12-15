@@ -198,6 +198,8 @@ def delete(product= None):
       try:
         obj = Goods.query.filter_by(goodsid = i).first()
         obj.delete_it()
+        sql = text('update goods set `delete` = 1 where `goodsid` ='+str(i)+'')
+        result = db.engine.execute(sql)
         lis.append(obj.goodsname)
         db.session.commit()
       except:
@@ -211,10 +213,22 @@ def undo(product= None):
   if product is None :
     return jsonify({'status' : 'error'})
   else:
-    obj = Goods.query.filter_by(goodsid = product).first()
-    obj.undo()
-    db.session.commit()
-    return jsonify({'status' : 'deleted'})
+    db.session.flush()
+    product= product.split(';')
+    lis = []
+    print product
+    for i in product:
+      try:
+        obj = Goods.query.filter_by(goodsid = i).first()
+        obj.delete_it()
+        sql = text('update goods set `delete` = 0 where `goodsid` ='+str(i)+'')
+        result = db.engine.execute(sql)
+        lis.append(obj.goodsname)
+        db.session.commit()
+      except:
+        pass
+    db.session.flush()
+    return jsonify({'status' : str(list(set(lis)))})
 
 
 
