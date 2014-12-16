@@ -341,7 +341,7 @@ def route(cord = None):
 
       count = count + 1 
     steps['lenght'] = count
-   except:
+  except:
     final = {}
     final['status'] = 'ZERO_RESULTS'
   return jsonify(final)
