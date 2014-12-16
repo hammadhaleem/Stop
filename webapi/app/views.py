@@ -332,6 +332,7 @@ def route(cord = None):
     data = {}
     final = {}
     list_keys = ['distance','duration','start_location','end_location','html_instructions']
+
     for objects in steps['steps']:
       data[count] = objects
       final[count] = {}
@@ -340,8 +341,9 @@ def route(cord = None):
           final[count][key] = value  
 
       count = count + 1 
-    steps['lenght'] = count
+    final['length'] = count
   except:
     final = {}
     final['status'] = 'ZERO_RESULTS'
+    final['length'] = 0
   return jsonify(final)
