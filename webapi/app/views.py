@@ -236,7 +236,7 @@ def undo(product= None):
     return jsonify({'status' : str(list(set(lis)))})
 
 
-def to_stripped_string(sentance):
+def to_stripped_string(sentence):
   data = " ".join(sentence.split())
   return data
 
