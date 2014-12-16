@@ -341,7 +341,7 @@ def route(cord = None):
           final[count][key] = value  
 
       count = count + 1 
-    final['length'] = count
+    final['length'] = count - 1
   except:
     final = {}
     final['status'] = 'ZERO_RESULTS'
