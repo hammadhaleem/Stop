@@ -236,13 +236,15 @@ def undo(product= None):
     return jsonify({'status' : str(list(set(lis)))})
 
 
+def to_stripped_string(sentance):
+  data = " ".join(sentence.split())
+  return data
 
 @app.route('/register/<username>/<email>/<phone_number>/<password>/')
 @app.route('/register/<username>/<email>/<phone_number>/<password>')
-
 def register(username,email,phone_number,password):
 	user = User()
-	user.Addpeople(username,email,phone_number,password)
+	user.Addpeople(to_stripped_string(username),to_stripped_string(email),to_stripped_string(phone_number),to_stripped_string(password))
 	try :	
 		db.session.add(user)
 		db.session.commit()
