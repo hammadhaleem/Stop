@@ -290,53 +290,57 @@ def search(keyword=None):
 @app.route('/getpath/<cord>', methods=['GET'])
 @app.route('/getpath/<cord>/', methods=['GET'])
 def route(cord = None):
-  cord = str(cord)
-  cord = cord.split(";")
-  start = cord[0]
-  end = cord[len(cord)-1]
-  cord.pop(0)
-  cord.pop(len(cord)-1)
-  start = str(start)
-  end   = str(end)
-  string = ""
+  try:
+    cord = str(cord)
+    cord = cord.split(";")
+    start = cord[0]
+    end = cord[len(cord)-1]
+    cord.pop(0)
+    cord.pop(len(cord)-1)
+    start = str(start)
+    end   = str(end)
+    string = ""
 
-  for i in cord:
-    string = string+","+i
+    for i in cord:
+      string = string+","+i
 
-  string = string[1:]
+    string = string[1:]
 
-  key = "AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
-  url = "https://maps.googleapis.com/maps/api/directions/json?origin="
-  url = url + start+'&destination='+end+'&waypoints=optimize:true|'+string+'&key='
-  url = url +key
-  r = requests.get(url)
-  data = dict(json.loads(str(r.content)))
-  data['url'] = url
-  if data['status'] == 'ZERO_RESULTS' or data['status'] == 'NOT_FOUND':
-    return jsonify(data)
-  string  = ""
-  da = {}
+    key = "AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
+    url = "https://maps.googleapis.com/maps/api/directions/json?origin="
+    url = url + start+'&destination='+end+'&waypoints=optimize:true|'+string+'&key='
+    url = url +key
+    r = requests.get(url)
+    data = dict(json.loads(str(r.content)))
+    data['url'] = url
+    if data['status'] == 'ZERO_RESULTS' or data['status'] == 'NOT_FOUND':
+      return jsonify(data)
+    string  = ""
+    da = {}
 
-  steps = {}
-  keys = []
-  for objects in data['routes']:
-    for key,value in objects.items():
-      if key =="legs":
-        da[key] = value
-        for dic in value:
-          dic = dict(dic)
-          for key,value in dic.items():
-            steps[key] = value
-  count = 1
-  data = {}
-  final = {}
-  list_keys = ['distance','duration','start_location','end_location','html_instructions']
-  for objects in steps['steps']:
-    data[count] = objects
-    final[count] = {}
-    for key,value in data[count].items():
-      if key in list_keys:
-        final[count][key] = value  
+    steps = {}
+    keys = []
+    for objects in data['routes']:
+      for key,value in objects.items():
+        if key =="legs":
+          da[key] = value
+          for dic in value:
+            dic = dict(dic)
+            for key,value in dic.items():
+              steps[key] = value
+    count = 1
+    data = {}
+    final = {}
+    list_keys = ['distance','duration','start_location','end_location','html_instructions']
+    for objects in steps['steps']:
+      data[count] = objects
+      final[count] = {}
+      for key,value in data[count].items():
+        if key in list_keys:
+          final[count][key] = value  
 
-    count = count + 1 
+      count = count + 1 
+  except:
+    final = {}
+    final['status'] = 'ZERO_RESULTS'
   return jsonify(final)
