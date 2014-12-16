@@ -301,8 +301,10 @@ def route(cord = None):
   string = ""
 
   for i in cord:
-    string = i + string+","+i
+    string = string+","+i
+
   string = string[1:]
+
   key = "AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
   url = "https://maps.googleapis.com/maps/api/directions/json?origin="
   url = url + start+'&destination='+end+'&waypoints=optimize:true|'+string+'&key='
@@ -314,12 +316,13 @@ def route(cord = None):
     return jsonify(data)
   string  = ""
   da = {}
+
+  steps = {}
   keys = []
   for objects in data['routes']:
     for key,value in objects.items():
       if key =="legs":
         da[key] = value
-        steps = {}
         for dic in value:
           dic = dict(dic)
           for key,value in dic.items():
