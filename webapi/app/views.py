@@ -271,11 +271,12 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,addre
   try:
       r = requests.get(start)
       data = dict(json.loads(r.text))
-      Longitude = data['results']['geometry']['location']['lat']
-      Latitude = data['results']['geometry']['location']['lng']
+      Latitude = data['results']['geometry']['location']['lat']
+      Longitude = data['results']['geometry']['location']['lng']
+
+      print data, Latitude,Longitude
   except:
       pass
-
   good = Goods()
   good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid)
   try:
