@@ -271,13 +271,13 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,addre
   try:
       r = requests.get(url)
       data = dict(json.loads(r.text))
-      Latitude = data['results']['geometry']['location']['lat']
-      Longitude = data['results']['geometry']['location']['lng']
+      Latitude = data['results'][0]['geometry']['location']['lat']
+      Longitude = data['results'][0]['geometry']['location']['lng']
       print data, Latitude,Longitude,url
   except Exception as e:
       print e
       pass
-      
+
   good = Goods()
   good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid)
   try:
