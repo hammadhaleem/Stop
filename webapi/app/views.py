@@ -265,7 +265,7 @@ def get_added_good(userid):
   return jsonify({"objects" : lis})
 
 @app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
-@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
+@app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>/')
 def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid):
   url = "https://maps.googleapis.com/maps/api/geocode/json?address="+str(address)+"&key=AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
   try:
