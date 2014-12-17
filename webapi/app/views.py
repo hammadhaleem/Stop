@@ -267,6 +267,15 @@ def get_added_good(userid):
 @app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
 @app.route('/AddProduct/<Price>/<Pictureid>/<Longitude>/<Latitude>/<Goodsname>/<Goodsdescription>/<address>/<userid>')
 def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid):
+  url = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyCkWUIO4p6JAfGC4NkQJDRtX87BPVx4kBM"
+  try:
+      r = requests.get(start)
+      data = dict(json.loads(r.text))
+      Longitude = data['results']['geometry']['location']['lat']
+      Latitude = data['results']['geometry']['location']['lng']
+  except:
+      pass
+
 	good = Goods()
 	good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid)
 	try:
