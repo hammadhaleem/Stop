@@ -275,7 +275,8 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,addre
       Longitude = data['results']['geometry']['location']['lng']
 
       print data, Latitude,Longitude
-  except:
+  except Exception as e:
+      print e 
       pass
   good = Goods()
   good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid)
