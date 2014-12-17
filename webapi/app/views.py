@@ -276,15 +276,14 @@ def add_good(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,addre
   except:
       pass
 
-	good = Goods()
-	good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid)
-	try:
-		db.session.add(good)
-		db.session.commit()
-		return jsonify(good.getdata())
-	except Exception as e:
-		print e
-		return jsonify({'status' : 'Error'})
+  good = Goods()
+  good.GoodsInformation(Price,Pictureid,Longitude,Latitude,Goodsname,Goodsdescription,address,userid)
+  try:
+    db.session.add(good)
+    db.session.commit()
+    return jsonify(good.getdata())
+  except Exception as e:
+    return jsonify({'status' : 'Error'})
 
 
 
